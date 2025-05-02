@@ -31,7 +31,6 @@ if method == "1":
 
 # Caesar Cypher Encryption
 if method == "2": 
-    key = input("Please Enter Your Caesar Cypher Key Here: ")
     decryptedText = caesarCypher.decrypt(content)
     
     
