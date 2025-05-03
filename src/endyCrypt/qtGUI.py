@@ -6,6 +6,10 @@ import rsa
 import caesarCypher
 import binary
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_FILE = os.path.join(BASE_DIR, 'data.txt')
+KEYS_FILE = os.path.join(BASE_DIR, 'keys.txt')
+
 # Main App Window
 class EncryptionDecryptionApp(QWidget):
     def __init__(self):
@@ -175,7 +179,7 @@ class EncryptionDecryptionApp(QWidget):
                 encryptedText, caesarKey = caesarCypher.encrypt(text)
                 label, ok = QInputDialog.getText(self, "Save Key", "Enter a label for this Caesar key:")
                 if ok and label:
-                    with open("keys.txt", "a") as f:
+                    with open(KEYS_FILE, "a") as f:
                         f.write(f"{label} | Caesar | {caesarKey}\n")
 
             elif method == "RSA":
@@ -184,10 +188,10 @@ class EncryptionDecryptionApp(QWidget):
                 encryptedText = ' '.join(map(str, encryptedBlocks))
                 label, ok = QInputDialog.getText(self, "Save Key", "Enter a label for this RSA key:")
                 if ok and label:
-                    with open("keys.txt", "a") as f:
+                    with open(KEYS_FILE, "a") as f:
                         f.write(f"{label} | RSA | d: {rsaD} , n: {rsaN}\n")
 
-            with open("data.txt", "w") as f:
+            with open(DATA_FILE, "w") as f:
                 f.write(encryptedText)
 
             self.loadData()
@@ -219,7 +223,7 @@ class EncryptionDecryptionApp(QWidget):
                     blocks = list(map(int, encryptedText.strip().split()))
                     decryptedText = rsa.decrypt_text(blocks, d, n)
 
-            with open("data.txt", "w") as f:
+            with open(DATA_FILE, "w") as f:
                 f.write(decryptedText)
 
             self.loadData()
@@ -228,8 +232,8 @@ class EncryptionDecryptionApp(QWidget):
 
     # Helper To Search Keys Based On Label
     def getKeyByLabel(self, labelTypeText, keyType):
-        if os.path.exists("keys.txt"):
-            with open("keys.txt", "r") as f:
+        if os.path.exists(KEYS_FILE):
+            with open(KEYS_FILE, "r") as f:
                 for line in f:
                     parts = line.strip().split("|")
                     if len(parts) >= 3 and parts[1].strip() == keyType:
@@ -252,8 +256,8 @@ class EncryptionDecryptionApp(QWidget):
 
     # Load Data from data.txt
     def loadData(self):
-        if os.path.exists("data.txt"):
-            with open("data.txt", "r") as f:
+        if os.path.exists(DATA_FILE):
+            with open(DATA_FILE, "r") as f:
                 content = f.read()
             if self.tabs.currentIndex() == 0:
                 self.dataTextEdit.setPlainText(content)
@@ -268,8 +272,8 @@ class EncryptionDecryptionApp(QWidget):
     # Update Caesar Key Dropdown
     def updateCaesarKeySelection(self):
         self.caesarKeySelect.clear()
-        if os.path.exists("keys.txt"):
-            with open("keys.txt", "r") as f:
+        if os.path.exists(KEYS_FILE):
+            with open(KEYS_FILE, "r") as f:
                 for line in f:
                     if "| Caesar |" in line:
                         label = line.split("|")[0].strip()
@@ -278,8 +282,8 @@ class EncryptionDecryptionApp(QWidget):
     # Update RSA Key Dropdown
     def updateRsaKeySelection(self):
         self.rsaKeySelect.clear()
-        if os.path.exists("keys.txt"):
-            with open("keys.txt", "r") as f:
+        if os.path.exists(KEYS_FILE):
+            with open(KEYS_FILE, "r") as f:
                 for line in f:
                     if "| RSA |" in line:
                         label = line.split("|")[0].strip()
@@ -288,8 +292,8 @@ class EncryptionDecryptionApp(QWidget):
     # Update Keys List Widget
     def updateKeysList(self):
         self.keyListWidget.clear()
-        if os.path.exists("keys.txt"):
-            with open("keys.txt", "r") as f:
+        if os.path.exists(KEYS_FILE):
+            with open(KEYS_FILE, "r") as f:
                 for line in f:
                     self.keyListWidget.addItem(line.strip())
 
@@ -298,10 +302,10 @@ class EncryptionDecryptionApp(QWidget):
         selectedItem = self.keyListWidget.currentItem()
         if selectedItem:
             keyToDelete = selectedItem.text()
-            if os.path.exists("keys.txt"):
-                with open("keys.txt", "r") as f:
+            if os.path.exists(KEYS_FILE):
+                with open(KEYS_FILE, "r") as f:
                     keys = f.readlines()
-                with open("keys.txt", "w") as f:
+                with open(KEYS_FILE, "w") as f:
                     for key in keys:
                         if key.strip() != keyToDelete:
                             f.write(key)
@@ -320,10 +324,10 @@ class EncryptionDecryptionApp(QWidget):
                 newLabel, ok = QInputDialog.getText(self, "Rename Key", "Enter new key label:", text=oldLabel)
                 if ok and newLabel:
                     newLine = f"{newLabel} | {keyType} | {value}\n"
-                    if os.path.exists("keys.txt"):
-                        with open("keys.txt", "r") as f:
+                    if os.path.exists(KEYS_FILE):
+                        with open(KEYS_FILE, "r") as f:
                             keys = f.readlines()
-                        with open("keys.txt", "w") as f:
+                        with open(KEYS_FILE, "w") as f:
                             for key in keys:
                                 if key.strip() == oldLine.strip():
                                     f.write(newLine)

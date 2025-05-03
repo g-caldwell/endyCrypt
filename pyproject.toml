@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "endyCrypt"
+version = "2.0.0"
+authors = [
+    { name = "Gabriel Caldwell", email = "gabeacaldwell@gmail.com" },
+]
+description = "A PyQt6-based GUI application for encrypting and decrypting text using RSA, Caesar Cypher, and Binary."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "sympy>=1.13.1",
+    "PyQt6>=6.9.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/g-caldwell/endyCrypt"
+Issues = "https://github.com/g-caldwell/endyCrypt/issues"
