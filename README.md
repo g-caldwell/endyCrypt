@@ -1,5 +1,5 @@
 
-# EndyCrypt
+# EnD-Crypt
 
 EndyCrypt is a multi-method text encryption and decryption tool that supports RSA, Caesar Cipher, and Binary encoding. This project provides both a command-line interface and a modern PyQt6 GUI for seamless encryption and decryption tasks. It also includes key management, allowing users to securely store encryption keys between sessions.
 
