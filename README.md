@@ -1,25 +1,25 @@
 
 # EnD-Crypt
 
-EndyCrypt is a multi-method text encryption and decryption tool that supports RSA, Caesar Cipher, and Binary encoding. This project provides both a command-line interface and a modern PyQt6 GUI for seamless encryption and decryption tasks. It also includes key management, allowing users to securely store encryption keys between sessions.
+EnD-Crypt is a text encryption and decryption tool that supports RSA, Caesar Cipher, and Binary methods. This project provides both a command-line interface and a PyQt6 GUI for encryption and decryption tasks. It also includes key management, allowing users to securely store encryption keys between sessions.
 
 ## Features
 
-- **RSA Encryption/Decryption**: Utilizes the RSA algorithm for secure public-key encryption.
-- **Caesar Cipher**: A simple but effective cipher for text obfuscation using a shift key.
-- **Binary Encoding**: Converts text into binary format and back for secure transmission.
+- **RSA**: Utilizes the RSA algorithm for secure public-key encryption.
+- **Caesar Cipher**: A form of cipher that uses a shift key for text obfuscation.
+- **Binary**: Converts text into binary format and back for secure transmission.
 - **Persistent Key Storage**: Saves RSA and Caesar Cipher keys between sessions for easy retrieval.
-- **Modern GUI**: A clean and intuitive PyQt6 GUI for both beginners and advanced users.
+- **GUI**: A clean and intuitive PyQt6 GUI for user tasks.
 
 ## Installation
 
-To get started with EndyCrypt, first install the required dependencies:
+To get started with EnD-Crypt, first install the required dependencies:
 
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/g-caldwell/endyCrypt
-   cd endyCrypt
+   git clone https://github.com/g-caldwell/EnD-Crypt
+   cd EnD-Crypt
    ```
 
 2. **Install the dependencies:**
@@ -98,10 +98,10 @@ Keys for RSA and Caesar Cipher are stored persistently in `keys.txt` for easy ac
 ## File Structure
 
 ```
-endyCrypt/
+EnD-Crypt/
 ├── dist/
-│   ├── endycrypt-2.0.0-py3-none-any.whl
-│   └── endycrypt-2.0.0.tar.gz
+│   ├── EnD-Crypt-2.0.0-py3-none-any.whl
+│   └── EnD-Crypt-2.0.0.tar.gz
 ├── src/
 │   ├── binary.py              # Binary encoding/decoding
 │   ├── caesarCypher.py        # Caesar Cipher logic
